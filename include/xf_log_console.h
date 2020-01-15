@@ -49,8 +49,8 @@ namespace xf::log
 }   // namespace xf::log
 
 #ifdef  _xf_log_console
-#define _xfLog(format, ...)  { char _xf_console_log_text_variable[xf::log::_max_length()]{ 0 };     \
-        std::snprintf(_xf_console_log_text_variable, xf::log::_max_length(), format, __VA_ARGS__);  \
+#define _xfLog(...)  { char _xf_console_log_text_variable[xf::log::_max_length()]{ 0 };     \
+        std::snprintf(_xf_console_log_text_variable, xf::log::_max_length(), __VA_ARGS__);  \
         xf::log::_output_to_console(_xf_console_log_text_variable); }
 #else
 #define _xfLog(...)
