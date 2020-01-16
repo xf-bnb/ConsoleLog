@@ -41,7 +41,7 @@ namespace xf::log
 
         char info[32]{ 0 };
         std::snprintf(info, 32, "%02d:%02d:%02d.%03d", lt.tm_hour, lt.tm_min, lt.tm_sec, int(tp.time_since_epoch().count() % 1000));
-        
+
         std::lock_guard<std::mutex> _auto_lock(_log_mutex());
         std::cout << info << "(" << std::this_thread::get_id() << ")-> " << text << std::endl;
     }
