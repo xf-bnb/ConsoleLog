@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
-A simple console log Library
-=======
 A simple console log library.
->>>>>>> e729cb4f6b91ad5f6964cbcc533ac624932a0aab
 version 1.0.0
 https://github.com/xf-bnb/ConsoleLog
 

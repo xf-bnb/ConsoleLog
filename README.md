@@ -13,12 +13,19 @@
   ```
 
 ### 特性
-* 适用于简单的日志输出场景，利用宏 `_xf_log_console` 控制日志是否输出。即：对于 _xfLog 打印语句，在定义了该宏时生效，未定义时将被编译器忽略。
-* _xfLog 打印语句是线程安全的，利用全局锁保证打印顺序。
-* 默认输出当前时间，精确到毫秒，以及当前线程id。示例：`01:23:45.678(0x34321523)-> log text`。
-* 单条日志最大长度不得超过1k，即1024个字符。
-* 对于常量 `format` 字符串结合 `C++17` 特性，可以得到类似 `printf` 的编译期警告。例如：
+* 适用于简单的日志输出场景，利用宏 `_xf_log_console` 控制日志是否输出。即：对于 `_xfLog` 打印语句，在定义了该宏时生效，未定义时将被编译器忽略。
+* `_xfLog` 打印语句是线程安全的，利用全局锁保证打印顺序。
+* 默认输出当前时间，精确到毫秒，以及当前线程id。示例：`01:23:45.678(0x34321523)-> log msg`。
+* 单条日志最大长度不能超过 1K(1024个字符)。
+* 对于常量 `format` 字符串结合 `C++17` 特性，可以得到类似 `printf` 的编译期警告。例如对于下面的代码：
   ```c++
-  
-  _xfLog("output: %s, number: %d", "string", 7);
+  long long x = 100;
+  _xfLog("output: %s, number: %d", "string", x);
+  ```
+  使用 clang 9.0 进行编译将会得到类似下面的警告：
+  ```c++
+  ./example/example.cpp:15:55: warning: format specifies type 'int' but the argument has type 'long long' [-Wformat]
+  _xfLog("output: %s, number: %d", "string", x);
+                              ~~             ^
+                              %lld
   ```
